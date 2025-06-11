@@ -1,0 +1,76 @@
+2025-06-09T17:09:49.752Z [WebDevelopmentService] error: Foydalanuvchi topilmadi
+2025-06-09T17:09:58.508Z [WebDevelopmentService] error: Foydalanuvchi topilmadi
+2025-06-09T17:10:21.217Z [WebDevelopmentService] error: Bu email allaqachon ro'yxatdan o'tgan
+2025-06-09T17:10:37.296Z [WebDevelopmentService] error: Refresh token mavjud emas
+2025-06-09T17:11:38.668Z [WebDevelopmentService] error: Refresh token mavjud emas
+2025-06-09T17:15:12.749Z [WebDevelopmentService] error: Refresh token mavjud emas
+2025-06-09T17:16:06.926Z [WebDevelopmentService] error: [object Object]
+2025-06-09T17:29:32.472Z [WebDevelopmentService] error: getAllDevelopers error: Cannot read properties of null (reading 'someNonExistingFunction')
+2025-06-09T17:29:32.479Z [WebDevelopmentService] error: Cannot read properties of null (reading 'someNonExistingFunction')
+2025-06-09T17:29:33.513Z [WebDevelopmentService] error: getAllDevelopers error: Cannot read properties of null (reading 'someNonExistingFunction')
+2025-06-09T17:29:33.514Z [WebDevelopmentService] error: Cannot read properties of null (reading 'someNonExistingFunction')
+2025-06-09 23:05:32 [WebDevelopmentService] error: logger is not defined
+2025-06-09 23:05:33 [WebDevelopmentService] error: logger is not defined
+2025-06-09 23:06:23 [WebDevelopmentService] error: logger is not defined
+2025-06-09 23:06:25 [WebDevelopmentService] error: logger is not defined
+2025-06-09 23:24:41 [WebDevelopmentService] error: mailService.sendActivationMail is not a function
+2025-06-09 23:24:46 [WebDevelopmentService] error: Bu email allaqachon ro'yxatdan o'tgan
+2025-06-09 23:25:37 [WebDevelopmentService] error: Bu email allaqachon ro'yxatdan o'tgan
+2025-06-09 23:26:04 [WebDevelopmentService] error: mailService.sendActivationMail is not a function
+2025-06-09 23:28:49 [WebDevelopmentService] error: Bu email allaqachon ro'yxatdan o'tgan
+2025-06-09 23:29:25 [WebDevelopmentService] error: Bu email allaqachon ro'yxatdan o'tgan
+2025-06-09 23:31:11 [WebDevelopmentService] error: Bu email allaqachon ro'yxatdan o'tgan
+2025-06-09 23:31:29 [WebDevelopmentService] error: Register error: crypto.randomBytes is not a function
+2025-06-09 23:31:29 [WebDevelopmentService] error: crypto.randomBytes is not a function
+2025-06-09 23:32:07 [WebDevelopmentService] error: Register error: mailService is not defined
+2025-06-09 23:32:07 [WebDevelopmentService] error: mailService is not defined
+2025-06-09 23:32:32 [WebDevelopmentService] error: Bu email allaqachon ro'yxatdan o'tgan
+2025-06-09 23:41:48 [WebDevelopmentService] error: Iltimos, avval akkountingizni faollashtiring.
+2025-06-09 23:43:39 [WebDevelopmentService] error: Iltimos, akkountingizni faollashtiring.
+2025-06-09 23:43:40 [WebDevelopmentService] error: Iltimos, akkountingizni faollashtiring.
+2025-06-10 10:20:05 [WebDevelopmentService] error: Noto'g'ri foydalanuvchi turi
+2025-06-10 11:24:11 [WebDevelopmentService] error: getAllWebsites error: Op is not defined
+2025-06-10 11:24:13 [WebDevelopmentService] error: getAllWebsites error: Op is not defined
+2025-06-10 11:24:31 [WebDevelopmentService] error: getAllWebsites error: column website.description does not exist
+2025-06-10 11:24:33 [WebDevelopmentService] error: getAllWebsites error: column website.description does not exist
+2025-06-10 16:03:25 [WebDevelopmentService] error: getAllContracts error: developer is not associated to contract!
+2025-06-10 16:05:18 [WebDevelopmentService] error: getAllContracts error: Include unexpected. Element has to be either a Model, an Association or an object.
+2025-06-10 16:05:19 [WebDevelopmentService] error: getAllContracts error: Include unexpected. Element has to be either a Model, an Association or an object.
+2025-06-10 16:05:56 [WebDevelopmentService] error: getAllContracts error: Include unexpected. Element has to be either a Model, an Association or an object.
+2025-06-10 16:12:05 [WebDevelopmentService] error: deleteContractDeveloper error: WHERE parameter "contractId" has invalid "undefined" value
+2025-06-10 16:12:07 [WebDevelopmentService] error: deleteContractDeveloper error: WHERE parameter "contractId" has invalid "undefined" value
+2025-06-10 16:12:45 [WebDevelopmentService] error: deleteContractDeveloper error: WHERE parameter "contractId" has invalid "undefined" value
+2025-06-10 16:14:00 [WebDevelopmentService] error: createContractDeveloper error: insert or update on table "contractDeveloper" violates foreign key constraint "contractDeveloper_contractId_fkey"
+2025-06-10 16:14:07 [WebDevelopmentService] error: createContractDeveloper error: insert or update on table "contractDeveloper" violates foreign key constraint "contractDeveloper_contractId_fkey"
+2025-06-10 21:58:43 [WebDevelopmentService] error: getAllFeedbacks error: Feedback.findAll is not a function
+2025-06-10 21:58:48 [WebDevelopmentService] error: getAllFeedbacks error: Feedback.findAll is not a function
+2025-06-10 22:05:45 [WebDevelopmentService] error: createFeedback error: notNull Violation: feedback.userType cannot be null
+2025-06-10 22:19:19 [WebDevelopmentService] error: ERROR GET /api/client/2 -> sendErrorResponse is not defined
+2025-06-10 22:20:55 [WebDevelopmentService] error: ERROR POST /api/auth/register -> Expected double-quoted property name in JSON at position 203 (line 8 column 1)
+2025-06-10 22:21:21 [WebDevelopmentService] error: ERROR POST /api/auth/register -> Expected double-quoted property name in JSON at position 203 (line 8 column 1)
+2025-06-10 22:21:21 [WebDevelopmentService] error: Expected double-quoted property name in JSON at position 203 (line 8 column 1)
+2025-06-10 22:21:56 [WebDevelopmentService] error: ERROR POST /api/auth/register -> Expected double-quoted property name in JSON at position 203 (line 8 column 1)
+2025-06-10 22:21:56 [WebDevelopmentService] error: Expected double-quoted property name in JSON at position 203 (line 8 column 1)
+2025-06-11 10:54:51 [WebDevelopmentService] error: Activate error: column admin.activationToken does not exist
+2025-06-11 10:55:42 [WebDevelopmentService] error: Activate error: column admin.activationToken does not exist
+2025-06-11 12:15:34 [WebDevelopmentService] error: createContract error: insert or update on table "contract" violates foreign key constraint "contract_clientId_fkey"
+2025-06-11 12:41:40 [WebDevelopmentService] error: createPayment error: insert or update on table "payment" violates foreign key constraint "payment_statusId_fkey"
+2025-06-11 14:21:56 [WebDevelopmentService] error: ERROR POST /api/admin/ -> Expected property name or '}' in JSON at position 7 (line 2 column 5)
+2025-06-11 14:21:56 [WebDevelopmentService] error: Expected property name or '}' in JSON at position 7 (line 2 column 5)
+2025-06-11 14:39:27 [WebDevelopmentService] error: createContract error: insert or update on table "contract" violates foreign key constraint "contract_clientId_fkey"
+2025-06-11 14:39:37 [WebDevelopmentService] error: createContract error: insert or update on table "contract" violates foreign key constraint "contract_clientId_fkey"
+2025-06-11 14:40:03 [WebDevelopmentService] error: createContract error: insert or update on table "contract" violates foreign key constraint "contract_clientId_fkey"
+2025-06-11 14:43:40 [WebDevelopmentService] error: getContractsByDateRange error: column contract.startDate does not exist
+2025-06-11 14:44:51 [WebDevelopmentService] error: getContractsByDateRange error: column contract.startDate does not exist
+2025-06-11 14:47:37 [WebDevelopmentService] error: getContractsByDateRange error: column contract.startDate does not exist
+2025-06-11 14:47:38 [WebDevelopmentService] error: getContractsByDateRange error: column contract.startDate does not exist
+2025-06-11 14:50:05 [WebDevelopmentService] error: getContractsByDateRange error: startDate is not defined
+2025-06-11 14:50:28 [WebDevelopmentService] error: getContractsByDateRange error: start_date is not defined
+2025-06-11 14:51:01 [WebDevelopmentService] error: getContractsByDateRange error: from is not defined
+2025-06-11 14:52:21 [WebDevelopmentService] error: getContractsByDateRange error: Cannot set headers after they are sent to the client
+2025-06-11 14:52:21 [WebDevelopmentService] error: ERROR POST /api/contract/api/contract/by-date -> Cannot set headers after they are sent to the client
+2025-06-11 14:52:21 [WebDevelopmentService] error: Cannot set headers after they are sent to the client
+2025-06-11 14:55:39 [WebDevelopmentService] error: getClientsByDateRange error: column client.fullName does not exist
+2025-06-11 15:40:07 [WebDevelopmentService] error: createContractDeveloper error: insert or update on table "contractDeveloper" violates foreign key constraint "contractDeveloper_developerId_fkey"
+2025-06-11 15:40:31 [WebDevelopmentService] error: createContractDeveloper error: insert or update on table "contractDeveloper" violates foreign key constraint "contractDeveloper_developerId_fkey"
+2025-06-11 15:40:35 [WebDevelopmentService] error: createContractDeveloper error: insert or update on table "contractDeveloper" violates foreign key constraint "contractDeveloper_developerId_fkey"
