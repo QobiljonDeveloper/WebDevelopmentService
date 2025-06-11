@@ -182,7 +182,7 @@ const register = async (req, res) => {
     const newUser = await Model.create(userData);
     const activationLink = `${config.get(
       "api_url"
-    )}/api/activate/${activationToken}`;
+    )}/api/activate/auth/${activationToken}`;
     await mailService.sendMail(email, activationLink);
 
     res.status(201).send({
