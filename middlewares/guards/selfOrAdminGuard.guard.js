@@ -93,12 +93,10 @@ const selfOrAdminGuard = (modelName, options = {}) => {
         return res.status(404).json({ message: `${modelName} topilmadi` });
       }
 
-      // 🔑 Har doim admin kira oladi
       if (userType === "admin") return next();
 
       const checkUserId = String(resource.userId) === String(userId);
 
-      // 🔁 Agar `options.checkUserType === true` bo‘lsa, `userType` ham tekshiriladi
       const checkUserType =
         !options.checkUserType || resource.userType === userType;
 

@@ -34,7 +34,7 @@ const updateClient = async (req, res) => {
     const { id } = req.params;
     logger.info(`updateClient called with id=${id}`);
 
-    const { error } = updateClientSchema(req.body);
+    const { error } = updateClientSchema.validate(req.body);
     if (error) {
       logger.warn("Validation error: " + error.details[0].message);
       return res.status(400).send({ message: error.details[0].message });
