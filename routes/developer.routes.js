@@ -4,7 +4,6 @@ const {
   updateDeveloper,
   deleteDeveloper,
   getTopDevelopersPerService,
-  changePassword,
 } = require("../controllers/developer.controller");
 const authGuard = require("../middlewares/guards/auth.guard");
 const roleGuard = require("../middlewares/guards/role.guard");
@@ -33,14 +32,6 @@ router.delete(
   roleGuard(["developer", "admin"]),
   selfOrAdminGuard("admin"),
   deleteDeveloper
-);
-
-router.patch(
-  "/:id/change-password",
-  authGuard,
-  roleGuard(["developer", "admin"]),
-  selfOrAdminGuard,
-  changePassword
 );
 
 router.post("/most-active-developers", getTopDevelopersPerService);

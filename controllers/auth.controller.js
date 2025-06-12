@@ -19,6 +19,7 @@ const Client = require("../models/client.model");
 const Developer = require("../models/developer.model");
 const mailService = require("../services/mail.service");
 
+// Foydalanuvchi modelini aniqlash
 const getUserModel = (type) => {
   switch (type) {
     case "admin":
@@ -32,6 +33,7 @@ const getUserModel = (type) => {
   }
 };
 
+// JWT service aniqlash
 const getJwtService = (type) => {
   switch (type) {
     case "admin":
@@ -45,39 +47,35 @@ const getJwtService = (type) => {
   }
 };
 
+// LOGIN
 const login = async (req, res) => {
   try {
     const { error } = loginSchema.validate(req.body);
-    if (error) {
+    if (error)
       return sendErrorResponse({ message: error.details[0].message }, res);
-    }
 
     const { email, password, userType } = req.body;
     const Model = getUserModel(userType);
     const jwtService = getJwtService(userType);
 
-    if (!Model || !jwtService) {
+    if (!Model || !jwtService)
       return sendErrorResponse(
         { message: "Noto'g'ri foydalanuvchi turi" },
         res
       );
-    }
 
     const user = await Model.findOne({ where: { email } });
-    if (!user) {
+    if (!user)
       return sendErrorResponse({ message: "Email yoki parol noto'g'ri" }, res);
-    }
 
-    if (!user.isActive) {
+    if (!user.isActive)
       return res
         .status(403)
         .json({ message: "Akkountingiz faollashtirilmagan." });
-    }
 
     const verified = await bcrypt.compare(password, user.password);
-    if (!verified) {
+    if (!verified)
       return sendErrorResponse({ message: "Email yoki parol noto'g'ri" }, res);
-    }
 
     const payload = {
       id: user.id,
@@ -87,8 +85,8 @@ const login = async (req, res) => {
     };
 
     const tokens = jwtService.generateTokens(payload);
-
     const hashedToken = await bcrypt.hash(tokens.accessToken, 7);
+
     user.hashed_token = hashedToken;
     await user.save();
 
@@ -107,6 +105,7 @@ const login = async (req, res) => {
   }
 };
 
+// REGISTER
 const register = async (req, res) => {
   try {
     const { userType } = req.body;
@@ -134,9 +133,8 @@ const register = async (req, res) => {
     }
 
     const { error } = schema.validate(req.body);
-    if (error) {
+    if (error)
       return sendErrorResponse({ message: error.details[0].message }, res);
-    }
 
     const {
       full_name,
@@ -152,9 +150,8 @@ const register = async (req, res) => {
 
     const Model = getUserModel(userType);
     const exists = await Model.findOne({ where: { email } });
-    if (exists) {
+    if (exists)
       return sendErrorResponse({ message: "Email allaqachon mavjud" }, res);
-    }
 
     const hashedPassword = await bcrypt.hash(password, 10);
     const activationToken = crypto.randomBytes(32).toString("hex");
@@ -195,22 +192,19 @@ const register = async (req, res) => {
   }
 };
 
+// LOGOUT
 const logout = async (req, res) => {
   try {
     const { refreshToken } = req.cookies;
     if (!refreshToken) {
       logger.warn("Logout failed: Refresh token mavjud emas");
       return sendErrorResponse(
-        {
-          message: "Refresh token mavjud emas",
-          statusCode: 400,
-        },
+        { message: "Refresh token mavjud emas", statusCode: 400 },
         res
       );
     }
 
-    let decoded;
-    let jwtService;
+    let decoded, jwtService;
     for (const type of ["admin", "client", "developer"]) {
       try {
         const service = getJwtService(type);
@@ -223,10 +217,7 @@ const logout = async (req, res) => {
     if (!decoded || !jwtService) {
       logger.warn("Logout failed: Token noto‘g‘ri yoki eskirgan");
       return sendErrorResponse(
-        {
-          message: "Token noto‘g‘ri yoki eskirgan",
-          statusCode: 401,
-        },
+        { message: "Token noto‘g‘ri yoki eskirgan", statusCode: 401 },
         res
       );
     }
@@ -235,10 +226,7 @@ const logout = async (req, res) => {
     if (!Model) {
       logger.warn(`Logout failed: invalid userType - ${decoded.userType}`);
       return sendErrorResponse(
-        {
-          message: "Noto'g'ri foydalanuvchi turi",
-          statusCode: 400,
-        },
+        { message: "Noto'g'ri foydalanuvchi turi", statusCode: 400 },
         res
       );
     }
@@ -247,10 +235,7 @@ const logout = async (req, res) => {
     if (!user) {
       logger.warn(`Logout failed: user not found - id: ${decoded.id}`);
       return sendErrorResponse(
-        {
-          message: "Foydalanuvchi topilmadi",
-          statusCode: 404,
-        },
+        { message: "Foydalanuvchi topilmadi", statusCode: 404 },
         res
       );
     }
@@ -259,44 +244,33 @@ const logout = async (req, res) => {
     await user.save();
 
     res.clearCookie("refreshToken");
-
     logger.info(
       `User logged out successfully: id=${user.id}, type=${decoded.userType}`
     );
 
-    res.status(200).send({
-      message: "Tizimdan chiqildi",
-    });
+    res.status(200).send({ message: "Tizimdan chiqildi" });
   } catch (error) {
-    logger.error(`Logout error: ${error.message}`, {
-      stack: error.stack,
-    });
+    logger.error(`Logout error: ${error.message}`, { stack: error.stack });
     sendErrorResponse(
-      {
-        message: "Serverda xatolik yuz berdi",
-        statusCode: 500,
-      },
+      { message: "Serverda xatolik yuz berdi", statusCode: 500 },
       res
     );
   }
 };
 
+// REFRESH TOKEN
 const refreshToken = async (req, res) => {
   try {
     const { refreshToken } = req.cookies;
     if (!refreshToken) {
       logger.warn("Refresh token mavjud emas");
       return sendErrorResponse(
-        {
-          message: "Refresh token mavjud emas",
-          statusCode: 400,
-        },
+        { message: "Refresh token mavjud emas", statusCode: 400 },
         res
       );
     }
 
-    let decoded;
-    let jwtService;
+    let decoded, jwtService;
     for (const type of ["admin", "client", "developer"]) {
       try {
         const service = getJwtService(type);
@@ -310,10 +284,7 @@ const refreshToken = async (req, res) => {
     if (!decoded || !jwtService) {
       logger.warn("Refresh token noto‘g‘ri yoki eskirgan");
       return sendErrorResponse(
-        {
-          message: "Token noto‘g‘ri yoki eskirgan",
-          statusCode: 401,
-        },
+        { message: "Token noto‘g‘ri yoki eskirgan", statusCode: 401 },
         res
       );
     }
@@ -322,10 +293,7 @@ const refreshToken = async (req, res) => {
     if (!Model) {
       logger.warn(`Refresh token: invalid userType - ${decoded.userType}`);
       return sendErrorResponse(
-        {
-          message: "Noto'g'ri foydalanuvchi turi",
-          statusCode: 400,
-        },
+        { message: "Noto'g'ri foydalanuvchi turi", statusCode: 400 },
         res
       );
     }
@@ -334,10 +302,7 @@ const refreshToken = async (req, res) => {
     if (!user) {
       logger.warn(`Refresh token: user not found - id: ${decoded.id}`);
       return sendErrorResponse(
-        {
-          message: "Foydalanuvchi topilmadi",
-          statusCode: 404,
-        },
+        { message: "Foydalanuvchi topilmadi", statusCode: 404 },
         res
       );
     }
@@ -345,10 +310,7 @@ const refreshToken = async (req, res) => {
     if (user.refresh_token && user.refresh_token !== refreshToken) {
       logger.warn("Refresh token mos emas");
       return sendErrorResponse(
-        {
-          message: "Refresh token mos emas",
-          statusCode: 401,
-        },
+        { message: "Refresh token mos emas", statusCode: 401 },
         res
       );
     }
@@ -358,8 +320,8 @@ const refreshToken = async (req, res) => {
       email: user.email,
       userType: decoded.userType,
     };
-    const tokens = jwtService.generateTokens(payload);
 
+    const tokens = jwtService.generateTokens(payload);
     user.refresh_token = tokens.refreshToken;
     await user.save();
 
@@ -381,57 +343,47 @@ const refreshToken = async (req, res) => {
       stack: error.stack,
     });
     sendErrorResponse(
-      {
-        message: "Serverda xatolik yuz berdi",
-        statusCode: 500,
-      },
+      { message: "Serverda xatolik yuz berdi", statusCode: 500 },
       res
     );
   }
 };
 
+// AKKAUNTNI AKTIVATSIYA QILISH
 const activate = async (req, res) => {
   try {
     const { token } = req.params;
 
     const userTypes = ["developer", "client", "admin"];
     let user = null;
-    let Model = null;
 
     for (const type of userTypes) {
-      Model = getUserModel(type);
-      user = await Model.findOne({
-        where: {
-          activationToken: token,
-        },
-      });
+      const Model = getUserModel(type);
+      user = await Model.findOne({ where: { activationToken: token } });
 
       if (user) {
         if (user.isActive) {
-          return res.status(400).send({
-            message: "Akkount allaqachon faollashtirilgan",
-          });
+          return res
+            .status(400)
+            .send({ message: "Akkount allaqachon faollashtirilgan" });
         }
+
         user.isActive = true;
         user.activationToken = null;
         await user.save();
 
-        return res.status(200).send({
-          message: "Akkount muvaffaqiyatli faollashtirildi",
-        });
+        return res
+          .status(200)
+          .send({ message: "Akkount muvaffaqiyatli faollashtirildi" });
       }
     }
 
-    return res.status(400).send({
-      message: "Faollashtirish tokeni noto‘g‘ri yoki muddati o‘tgan",
-    });
+    return res
+      .status(400)
+      .send({ message: "Faollashtirish tokeni noto‘g‘ri yoki muddati o‘tgan" });
   } catch (error) {
-    logger.error(`Activate error: ${error.message}`, {
-      stack: error.stack,
-    });
-    res.status(500).send({
-      message: "Serverda xatolik yuz berdi",
-    });
+    logger.error(`Activate error: ${error.message}`, { stack: error.stack });
+    res.status(500).send({ message: "Serverda xatolik yuz berdi" });
   }
 };
 
