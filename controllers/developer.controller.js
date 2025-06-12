@@ -90,7 +90,7 @@ const getTopDevelopersPerService = async (req, res) => {
           include: [
             {
               model: Website,
-              attributes: ["id", "title"], 
+              attributes: ["id", "title"],
             },
           ],
           attributes: [],
@@ -124,10 +124,50 @@ const getTopDevelopersPerService = async (req, res) => {
   }
 };
 
+const changePassword = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { oldPassword, newPassword, confirmPassword } = req.body;
+
+    logger.info(`changePassword called for developer id=${id}`);
+
+    if (!oldPassword || !newPassword || !confirmPassword) {
+      return res
+        .status(400)
+        .send({ message: "Hamma maydonlar to'ldirilishi kerak" });
+    }
+
+    if (newPassword !== confirmPassword) {
+      return res.status(400).send({ message: "Yangi parollar mos emas" });
+    }
+
+    const developer = await Developer.findByPk(id);
+    if (!developer) {
+      return res.status(404).send({ message: "Developer topilmadi" });
+    }
+
+    const isMatch = await bcrypt.compare(oldPassword, developer.password);
+    if (!isMatch) {
+      return res.status(400).send({ message: "Eski parol noto‘g‘ri" });
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    developer.password = hashedPassword;
+    await developer.save();
+
+    logger.info(`Password updated for developer id=${id}`);
+    res.status(200).send({ message: "Parol muvaffaqiyatli yangilandi" });
+  } catch (error) {
+    logger.error("changePassword error: " + error.message);
+    sendErrorResponse(error, res);
+  }
+};
+
 module.exports = {
   getAllDevelopers,
   getDeveloperById,
   updateDeveloper,
   deleteDeveloper,
   getTopDevelopersPerService,
+  changePassword,
 };

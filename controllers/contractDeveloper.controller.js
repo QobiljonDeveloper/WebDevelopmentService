@@ -60,27 +60,26 @@ const getContractDeveloperById = async (req, res) => {
   }
 };
 
+// DELETE developer
 const deleteContractDeveloper = async (req, res) => {
   try {
-    const { contractId, developerId } = req.body;
+    const { id } = req.params;
 
-    const record = await ContractDeveloper.findOne({
-      where: { contractId, developerId },
-    });
+    await ContractDeveloper.destroy({ where: { developerId: id } });
 
-    if (!record) {
-      return res.status(404).send({ message: "Bog‘lanish topilmadi" });
+    const deleted = await Developer.destroy({ where: { id } });
+
+    if (!deleted) {
+      return res.status(404).send({ message: "Developer topilmadi" });
     }
 
-    await record.destroy();
-
-
-    res.status(200).send({ message: "Bog‘lanish muvaffaqiyatli o‘chirildi" });
+    res.status(200).send({ message: "Developer muvaffaqiyatli o‘chirildi" });
   } catch (error) {
-    logger.error("deleteContractDeveloper error: " + error.message);
+    logger.error("deleteDeveloper error: " + error.message);
     sendErrorResponse(error, res);
   }
 };
+
 
 module.exports = {
   getAllContractDevelopers,

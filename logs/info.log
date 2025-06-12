@@ -841,3 +841,10 @@
 2025-06-11 15:42:25 [WebDevelopmentService] info: POST /api/developer/most-active-developers 500 39ms
 2025-06-11 15:43:13 [WebDevelopmentService] info: POST /api/developer/most-active-developers 200 599ms
 2025-06-11 15:57:11 [WebDevelopmentService] info: POST /api/payment/by-client 200 653ms
+2025-06-12 14:24:40 [WebDevelopmentService] info: PATCH /api/developer/1/cange-password 404 4ms
+2025-06-12 14:24:44 [WebDevelopmentService] info: PATCH /api/developer/2/cange-password 404 1ms
+2025-06-12 14:24:49 [WebDevelopmentService] info: PATCH /api/developer/2/change-password 404 932ms
+2025-06-12 14:24:52 [WebDevelopmentService] info: PATCH /api/developer/3/change-password 404 642ms
+2025-06-12 14:24:55 [WebDevelopmentService] info: PATCH /api/developer/4/change-password 404 550ms
+2025-06-12 14:24:57 [WebDevelopmentService] info: PATCH /api/developer/5/change-password 404 496ms
+2025-06-12 14:24:59 [WebDevelopmentService] info: PATCH /api/developer/6/change-password 404 363ms

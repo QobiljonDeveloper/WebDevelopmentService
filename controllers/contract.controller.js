@@ -71,7 +71,7 @@ const createContract = async (req, res) => {
 
     const { error } = createContractSchema.validate(contractData);
     if (error) {
-      logger.warn("Validation failed: " + error.message);
+      logger.warn("Validation failed: 3" + error.message);
       return res.status(400).send({ message: error.message });
     }
 
